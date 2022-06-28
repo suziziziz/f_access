@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       routes: {
-        '/': (context) => const Home(),
+        '/': (context) => Home(),
       },
     );
   }
