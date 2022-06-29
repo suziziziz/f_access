@@ -14,25 +14,15 @@ class _HomeState extends State<Home> {
   double _scrollPosition = 0.0;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         toolbarHeight: (248 - _scrollPosition).clamp(64, 248),
-        title: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 16),
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 328),
-              child: Image.asset("assets/images/banner.png"),
-            ),
-          ),
+        title: SizedBox(
+          height: (214 - _scrollPosition).clamp(40, 96),
+          child: Image.asset("assets/images/banner.png"),
         ),
       ),
       bottomNavigationBar: Padding(
@@ -69,8 +59,9 @@ class _HomeState extends State<Home> {
                     width: 52,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(32),
-                        color: Colors.black),
+                      borderRadius: BorderRadius.circular(32),
+                      color: Colors.black,
+                    ),
                   ),
                   ShaderMask(
                     blendMode: BlendMode.srcIn,
@@ -88,9 +79,11 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: NotificationListener<ScrollUpdateNotification>(
           onNotification: (notification) {
+            // if (notification.metrics.pixels < 300) {
             setState(() {
               _scrollPosition = notification.metrics.pixels;
             });
+            // }
             return true;
           },
           child: ListView(
@@ -99,10 +92,8 @@ class _HomeState extends State<Home> {
               parent: AlwaysScrollableScrollPhysics(),
             ),
             children: [
-              Container(
-                color: Colors.redAccent,
-                height: _scrollPosition.clamp(0, 248 - 64),
-              ),
+              SizedBox(height: _scrollPosition.clamp(0, 248 - 64)),
+              const SizedBox(height: 16),
               Wrap(
                 runSpacing: 16,
                 children: const [
